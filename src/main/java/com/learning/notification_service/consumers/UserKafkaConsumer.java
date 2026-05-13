@@ -1,5 +1,6 @@
 package com.learning.notification_service.consumers;
 
+import com.learning.event.UserCreatedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -9,12 +10,12 @@ import org.springframework.stereotype.Service;
 public class UserKafkaConsumer {
 
     @KafkaListener(topics = "user-random-topic")
-    public void handleUserRandomTopicConsumer1(String message){
-        log.info("Message Received to Consumer-1: {}", message);
+    public void handleUserRandomTopicConsumer(String message){
+        log.info("Message Received to Consumer: {}", message);
     }
 
-    @KafkaListener(topics = "user-random-topic")
-    public void handleUserRandomTopicConsumer2(String message){
-        log.info("Message Received to Consumer-2: {}", message);
+    @KafkaListener(topics = "user-created-topic")
+    public void handleUserCreatedTopic(UserCreatedEvent userCreatedEvent){
+        log.info("User Created reached consumer: {}", userCreatedEvent);
     }
 }
